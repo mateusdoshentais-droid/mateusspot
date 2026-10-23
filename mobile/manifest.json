@@ -1,0 +1,18 @@
+{
+  "name": "SpotCry Mobile",
+  "short_name": "SpotCry",
+  "description": "Seu Spotify pessoal conectado ao seu PC",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%231ED760'/><path d='M25 40 Q 50 32 75 42 M28 52 Q 50 45 72 54 M32 64 Q 50 58 68 66' stroke='%23121212' stroke-width='7' stroke-linecap='round' fill='none'/></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

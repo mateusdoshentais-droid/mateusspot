@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+.idea/
+debug.log
+*.log
+scratch/
+1788484083479-player-script.js
+1788484083486-player-script.js
+scan_folder_temp.js

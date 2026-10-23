@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>SpotCry Mobile</title>
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SpotCry">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23121212'/><circle cx='90' cy='90' r='50' fill='%231ED760'/><path d='M68 62v56l50-28z' fill='%23000'/></svg>">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+    <!-- Top App Bar -->
+    <header class="mobile-top-bar">
+        <h1 class="mobile-greeting" id="mobile-greeting">SpotCry</h1>
+        <div class="server-status-pill" id="server-status-pill">
+            <span class="status-dot connected" id="status-dot"></span>
+            <span id="server-ip-label">Conectado ao PC</span>
+        </div>
+    </header>
+
+    <!-- Main Scrollable Content Container -->
+    <main class="mobile-scroll-container">
+        
+        <!-- Tab 1: Início (Home) -->
+        <section id="tab-home" class="mobile-tab-view active">
+            <!-- 6-Card Quick Mixes -->
+            <div class="mobile-quick-grid" id="mobile-quick-grid">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Recentes -->
+            <h2 class="mobile-sec-title">Tocadas Recentemente</h2>
+            <div class="mobile-horizontal-row" id="mobile-recent-row"></div>
+
+            <!-- Mais Ouvidas -->
+            <h2 class="mobile-sec-title">Mais Ouvidas 🔥</h2>
+            <div class="mobile-track-list" id="mobile-top-list"></div>
+
+            <!-- Artistas -->
+            <h2 class="mobile-sec-title">Artistas Populares 🎤</h2>
+            <div class="mobile-horizontal-row" id="mobile-artists-row"></div>
+        </section>
+
+        <!-- Tab 2: Buscar (Search) -->
+        <section id="tab-search" class="mobile-tab-view">
+            <h2 class="mobile-sec-title" style="margin-top: 6px;">Buscar</h2>
+            <div class="mobile-search-input-wrap">
+                <svg viewBox="0 0 16 16" width="18" height="18" fill="#121212"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06l-3.185-3.184A6.75 6.75 0 0 1 .25 7z"/></svg>
+                <input type="text" id="mobile-search-input" placeholder="O que você quer ouvir?" autocomplete="off">
+            </div>
+            <div class="mobile-track-list" id="mobile-search-results"></div>
+        </section>
+
+        <!-- Tab 3: Sua Biblioteca (Library) -->
+        <section id="tab-library" class="mobile-tab-view">
+            <h2 class="mobile-sec-title" style="margin-top: 6px;">Sua Biblioteca</h2>
+            <!-- Liked Songs Quick Row -->
+            <div class="mobile-track-row" id="row-liked-songs" style="margin-bottom: 8px;">
+                <div class="mobile-row-thumb" style="background: linear-gradient(135deg, #450af5, #8e8ee5); display:flex; align-items:center; justify-content:center;">
+                    <svg viewBox="0 0 16 16" width="20" height="20" fill="#fff"><path d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z"/></svg>
+                </div>
+                <div class="mobile-row-info">
+                    <div class="mobile-row-title">Músicas Curtidas</div>
+                    <div class="mobile-row-artist" id="lib-fav-count-text">Playlist • 0 músicas</div>
+                </div>
+            </div>
+            <!-- Dynamic Playlists -->
+            <div class="mobile-track-list" id="mobile-playlists-list"></div>
+        </section>
+
+        <!-- Tab 4: SpotCry Connect (Controle Remoto do PC) -->
+        <section id="tab-connect" class="mobile-tab-view">
+            <h2 class="mobile-sec-title" style="margin-top: 6px;">SpotCry Connect 📱💻</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 13px;">
+                Ouça as músicas diretamente no seu celular ou controle a reprodução do computador à distância.
+            </p>
+
+            <div style="background: var(--bg-card); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                <div style="font-size: 12px; font-weight: 700; color: var(--spotify-green); text-transform: uppercase;">Modo de Reprodução</div>
+                <div style="display:flex; gap: 8px; margin-top: 12px;">
+                    <button class="connect-tab-pill active" id="btn-mode-phone">
+                        <span>🎧 Tocar no iPad / Celular</span>
+                    </button>
+                    <button class="connect-tab-pill" id="btn-mode-remote">
+                        <span>💻 Controlar o PC</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Remote Control Box -->
+            <div id="pc-remote-control-box" style="display:none; background: var(--bg-card); padding: 16px; border-radius: 8px;">
+                <div style="font-size: 14px; font-weight: 700;">Tocando no Computador</div>
+                <div id="remote-track-info" style="color: var(--text-secondary); margin: 6px 0 16px 0;">Nenhuma música ativa</div>
+                <div style="display:flex; justify-content: center; gap: 16px; align-items:center;">
+                    <button class="fs-icon-btn" id="btn-remote-prev">⏮</button>
+                    <button class="fs-play-circle-big" id="btn-remote-play" style="width: 50px; height: 50px;">▶</button>
+                    <button class="fs-icon-btn" id="btn-remote-next">⏭</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Mini Player (On Mobile: floating bar; On iPad: full-width bottom playback bar) -->
+    <div class="mobile-mini-player" id="mobile-mini-player" style="display:none;">
+        <div class="mini-progress-bar" id="mini-progress-bar"></div>
+        <div class="mini-left">
+            <img class="mini-thumb" id="mini-thumb" src="" alt="Capa">
+            <div class="mini-info">
+                <div class="mini-title" id="mini-title">Nome da Música</div>
+                <div class="mini-artist" id="mini-artist">Nome do Artista</div>
+            </div>
+        </div>
+        <div class="mini-center-ctrls">
+            <button class="mini-ctrl-btn ipad-only" id="btn-mini-prev" title="Anterior">
+                <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>
+            </button>
+            <button class="mini-ctrl-btn mini-play-circle" id="btn-mini-play" title="Play / Pause">
+                <svg id="mini-icon-play" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>
+                <svg id="mini-icon-pause" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" style="display:none;"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/></svg>
+            </button>
+            <button class="mini-ctrl-btn ipad-only" id="btn-mini-next" title="Próxima">
+                <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>
+            </button>
+        </div>
+        <div class="mini-right-actions ipad-only">
+            <button class="mini-ctrl-btn" id="btn-mini-expand" title="Expandir">
+                <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h2.44a.75.75 0 0 1 0 1.5H2.5a.75.75 0 0 1-.75-.75v-3.75a.75.75 0 0 1 1.5 0v2.44l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94 0a.75.75 0 0 1 1.06 0l2.72 2.72v-2.44a.75.75 0 0 1 1.5 0v3.75a.75.75 0 0 1-.75.75h-3.75a.75.75 0 0 1 0-1.5h2.44l-2.72-2.72a.75.75 0 0 1 0-1.06zM2.5 1.75h3.75a.75.75 0 0 1 0 1.5H3.81l2.72 2.72a.75.75 0 1 1-1.06 1.06L2.75 4.31v2.44a.75.75 0 0 1-1.5 0V3a1.25 1.25 0 0 1 1.25-1.25zm11 0a1.25 1.25 0 0 1 1.25 1.25v3.75a.75.75 0 0 1-1.5 0V4.31l-2.72 2.72a.75.75 0 0 1-1.06-1.06l2.72-2.72h-2.44a.75.75 0 0 1 0-1.5h3.75z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Full-Screen Now Playing Modal -->
+    <div class="mobile-fullscreen-modal" id="mobile-fullscreen-modal">
+        <div class="fs-modal-top">
+            <button class="fs-icon-btn" id="btn-close-fs-modal">
+                <svg viewBox="0 0 16 16" width="24" height="24" fill="#fff"><path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8.53a.75.75 0 0 1 0-1.06L9.97.47a.75.75 0 0 1 1.06 0z"/></svg>
+            </button>
+            <div class="fs-modal-title-wrap">
+                <span class="fs-modal-sub" id="fs-playing-from">Tocando da Biblioteca</span>
+            </div>
+            <button class="fs-icon-btn" id="btn-fs-more" style="visibility:hidden;">•••</button>
+        </div>
+
+        <div class="fs-modal-art-wrap">
+            <img class="fs-modal-art" id="fs-modal-art" src="" alt="Capa">
+        </div>
+
+        <div class="fs-meta-row">
+            <div>
+                <div class="fs-track-name" id="fs-track-name">Título da Música</div>
+                <div class="fs-track-artist" id="fs-track-artist">Nome do Artista</div>
+            </div>
+            <button class="fs-icon-btn" id="btn-fs-fav">
+                <svg viewBox="0 0 16 16" width="22" height="22" fill="#fff" id="fs-fav-svg"><path d="M1.626 3.161a2.766 2.766 0 0 1 3.91 0l.464.465.465-.465a2.766 2.766 0 0 1 3.91 3.91l-4.375 4.375-4.374-4.375a2.766 2.766 0 0 1 0-3.91zM2.686 4.22a1.266 1.266 0 0 0 0 1.79l3.315 3.314 3.314-3.314a1.266 1.266 0 0 0-1.79-1.79l-1.524 1.524-1.524-1.524a1.266 1.266 0 0 0-1.791 0z"/></svg>
+            </button>
+        </div>
+
+        <div class="fs-scrub-box">
+            <input type="range" class="fs-scrub-slider" id="fs-scrub-slider" value="0" min="0" max="100" step="0.1">
+            <div class="fs-time-row">
+                <span id="fs-current-time">0:00</span>
+                <span id="fs-total-time">0:00</span>
+            </div>
+        </div>
+
+        <div class="fs-controls-cluster">
+            <button class="fs-icon-btn" id="btn-fs-shuffle" title="Aleatório">
+                <svg viewBox="0 0 16 16" width="20" height="20" fill="#b3b3b3"><path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.391a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.98 3.75 13.15.922z"/></svg>
+            </button>
+            <button class="fs-icon-btn" id="btn-fs-prev">
+                <svg viewBox="0 0 16 16" width="26" height="26" fill="#fff"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>
+            </button>
+            <button class="fs-play-circle-big" id="btn-fs-play">
+                <svg id="fs-icon-play" viewBox="0 0 16 16" width="26" height="26" fill="#000"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>
+                <svg id="fs-icon-pause" viewBox="0 0 16 16" width="26" height="26" fill="#000" style="display:none;"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/></svg>
+            </button>
+            <button class="fs-icon-btn" id="btn-fs-next">
+                <svg viewBox="0 0 16 16" width="26" height="26" fill="#fff"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>
+            </button>
+            <button class="fs-icon-btn" id="btn-fs-repeat" title="Repetir">
+                <svg viewBox="0 0 16 16" width="20" height="20" fill="#b3b3b3"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Bar: On Mobile -> Bottom Dock; On iPad -> Left Sidebar -->
+    <nav class="mobile-bottom-nav">
+        <div class="ipad-sidebar-brand">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="#1ED760"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.624.624 0 1 1-.277-1.217c3.808-.871 7.076-.498 9.712 1.117a.623.623 0 0 1 .207.857zm1.224-2.719a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 0 1-.453-1.493c3.632-1.102 8.147-.568 11.233 1.33a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.97 9.215 8.79 6.027 9.757a.936.936 0 1 1-.544-1.792c3.664-1.112 9.704-.903 13.435 1.312a.936.936 0 0 1-.997 1.593z"/></svg>
+            <span class="ipad-brand-name">SpotCry</span>
+        </div>
+        <button class="nav-tab-item active" data-tab="tab-home">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h5v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6h5V7.577l-7.5-4.33z"/></svg>
+            <span>Início</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-search">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.279-9.407-9.279zM3.126 10.558c0-4.024 3.321-7.279 7.407-7.279 4.086 0 7.407 3.255 7.407 7.279 0 4.025-3.321 7.279-7.407 7.279-4.086 0-7.407-3.254-7.407-7.279z"/></svg>
+            <span>Buscar</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-library">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"/></svg>
+            <span>Sua Biblioteca</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-connect">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm-5 19.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM17 16H7V4h10v12z"/></svg>
+            <span>Connect</span>
+        </button>
+    </nav>
+
+
+    <script src="mobile.js"></script>
+</body>
+</html>

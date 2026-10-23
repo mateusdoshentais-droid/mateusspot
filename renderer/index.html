@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotCry Desktop</title>
+    <link rel="icon" type="image/png" href="assets/spotcry_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Global App Bar -->
+    <header id="global-top-bar">
+        <!-- Logo SpotCry -->
+        <div class="top-logo-btn" title="SpotCry">
+            <svg viewBox="0 0 32 32" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="spotcry-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00F5A0"/>
+                        <stop offset="60%" stop-color="#00D9F5"/>
+                        <stop offset="100%" stop-color="#0072FF"/>
+                    </linearGradient>
+                </defs>
+                <path d="M16 2.5C16 2.5 7.5 12.5 7.5 19C7.5 23.694 11.306 27.5 16 27.5C20.694 27.5 24.5 23.694 24.5 19C24.5 12.5 16 2.5 16 2.5Z" fill="url(#spotcry-logo-grad)"/>
+                <path d="M16 11V22M12 14V19M20 14V19M8.5 16.5V17.5M23.5 16.5V17.5" stroke="#0A0E17" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="16" cy="30" r="1.5" fill="url(#spotcry-logo-grad)"/>
+            </svg>
+        </div>
+
+        <!-- Center Controls: Home button + Search capsule -->
+        <div class="top-center-cluster">
+            <button class="top-home-btn active" id="btn-top-home" title="Início">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1h-6.5a1 1 0 0 1-1-1v-6h-3v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z" fill="currentColor"/></svg>
+            </button>
+            <div class="top-search-capsule" id="top-search-capsule">
+                <svg class="search-icon" viewBox="0 0 16 16" width="18" height="18"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06l-3.185-3.184A6.75 6.75 0 0 1 .25 7z" fill="currentColor"/></svg>
+                <input type="text" id="global-search-input" placeholder="O que você quer ouvir?" autocomplete="off">
+                <button class="search-web-shortcut-btn" id="btn-top-web-search" title="Pesquisar e baixar da Internet">
+                    <span>Web 🌐</span>
+                </button>
+                <div class="search-divider"></div>
+                <button class="search-browse-btn" title="Navegar">
+                    <svg viewBox="0 0 16 16" width="18" height="18"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z" fill="currentColor"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right: SpotCry Connect & User Profile -->
+        <div class="top-right-cluster">
+            <button class="top-connect-phone-btn" id="btn-connect-phone" title="Conectar Celular (SpotCry Connect)">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5 2c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                <span>Celular</span>
+            </button>
+            <button class="top-user-avatar" id="btn-user-settings" title="Configurações">
+                <span>M</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- App Body Grid -->
+    <div id="app">
+        <!-- Sidebar: Sua Biblioteca -->
+        <aside id="sidebar">
+            <div class="sidebar-inner">
+                <!-- Header -->
+                <div class="lib-main-head">
+                    <div class="lib-title-wrap" id="btn-lib-home">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z" fill="currentColor"/></svg>
+                        <span class="lib-heading">Sua Biblioteca</span>
+                    </div>
+                    <div class="lib-head-actions">
+                        <button class="icon-round-btn" id="btn-sidebar-add" title="Criar playlist ou pasta">
+                            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z" fill="currentColor"/></svg>
+                        </button>
+                        <button class="icon-round-btn" id="btn-sidebar-expand" title="Expandir">
+                            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M6.97.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06L8 2.56 4.53 6.03a.75.75 0 0 1-1.06-1.06l4.5-4.5zM11.47 11.47a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06L6 14.94l3.47-3.47a.75.75 0 0 1 1.06 0z" fill="currentColor"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter Pills Row -->
+                <div class="sidebar-pills-row">
+                    <button class="pill-chip active" data-pill="playlists">Playlists</button>
+                    <button class="pill-chip" data-pill="artists">Artistas</button>
+                    <button class="pill-chip" data-pill="albums">Álbuns</button>
+                    <button class="pill-chip" data-pill="genres">Estilos</button>
+                </div>
+
+                <!-- Sub-bar: Search in library & Recentes sort -->
+                <div class="sidebar-sub-bar">
+                    <button class="icon-round-btn" id="btn-lib-search" title="Buscar na Biblioteca">
+                        <svg viewBox="0 0 16 16" width="14" height="14"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06l-3.185-3.184A6.75 6.75 0 0 1 .25 7z" fill="currentColor"/></svg>
+                    </button>
+                    <div class="recentes-dropdown-btn">
+                        <span>Recentes</span>
+                        <svg viewBox="0 0 16 16" width="14" height="14"><path d="M15 14.5H1V13h14v1.5zm0-5H1V8h14v1.5zm-14-5A.75.75 0 0 1 1.75 3h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 4.5z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <!-- Items List -->
+                <div class="sidebar-items-scroll">
+                    <!-- Liked Songs -->
+                    <div class="lib-item" id="item-liked-songs">
+                        <div class="lib-item-thumb fav-gradient">
+                            <svg viewBox="0 0 16 16" width="20" height="20"><path d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z" fill="#fff"/></svg>
+                        </div>
+                        <div class="lib-item-meta">
+                            <span class="lib-item-name">Músicas Curtidas</span>
+                            <span class="lib-item-sub"><span class="pin-icon">📌</span> <span id="lib-fav-count">0</span> músicas</span>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Playlists / Albums Injected via JS -->
+                    <div id="sidebar-dynamic-list"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Filter Pills on Top of Main Panel -->
+            <div class="main-top-pills-bar">
+                <button class="main-pill-btn active" data-main-filter="all">Tudo</button>
+                <button class="main-pill-btn" data-main-filter="for-you">Feito para Você ✨</button>
+                <button class="main-pill-btn" data-main-filter="music">Músicas em Alta</button>
+                <button class="main-pill-btn" data-main-filter="artists">Artistas</button>
+                <button class="main-pill-btn" data-main-filter="albums">Álbuns</button>
+                <button class="main-pill-btn" data-main-filter="genres">Estilos & Gêneros</button>
+            </div>
+
+            <!-- View: Home -->
+            <section id="view-home" class="view active">
+                <!-- Top Quick Mixes Grid (Spotify 6-card row) -->
+                <div class="home-quick-grid" id="home-quick-mixes">
+                    <!-- Injected via JS -->
+                </div>
+
+                <!-- Smart Section: Feito para você -->
+                <div class="home-section-wrap" id="section-smart-made-for-you">
+                    <div class="home-section-head">
+                        <div>
+                            <h2 id="title-made-for-you">Feito para você ✨ <span class="section-badge" id="badge-made-for-you">Personalizado</span></h2>
+                            <p class="section-subtitle" id="sub-made-for-you">Seleção personalizada para você</p>
+                        </div>
+                    </div>
+                    <div class="home-cards-row" id="row-made-for-you">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Smart Section: Artistas semelhantes -->
+                <div class="home-section-wrap" id="section-smart-similar-artists">
+                    <div class="home-section-head">
+                        <div>
+                            <h2 id="title-similar-artists">Artistas semelhantes 🌟 <span class="section-badge" id="badge-similar-artists">Recomendados</span></h2>
+                            <p class="section-subtitle" id="sub-similar-artists">Artistas relacionados aos seus favoritos</p>
+                        </div>
+                    </div>
+                    <div class="home-cards-row" id="row-similar-artists">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Smart Section: Novas descobertas -->
+                <div class="home-section-wrap" id="section-smart-new-discoveries">
+                    <div class="home-section-head">
+                        <div>
+                            <h2 id="title-new-discoveries">Novas descobertas 🎧 <span class="section-badge" id="badge-new-discoveries">Descobertas</span></h2>
+                            <p class="section-subtitle" id="sub-new-discoveries">Músicas de artistas relacionados que você ainda não explorou</p>
+                        </div>
+                    </div>
+                    <div class="home-cards-row" id="row-new-discoveries">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Smart Section: Mais do que você curte -->
+                <div class="home-section-wrap" id="section-smart-more-liked">
+                    <div class="home-section-head">
+                        <div>
+                            <h2 id="title-more-liked">Mais do que você curte ❤️ <span class="section-badge" id="badge-more-liked">Mais Ouvidos</span></h2>
+                            <p class="section-subtitle" id="sub-more-liked">Músicas dos seus estilos e artistas favoritos</p>
+                        </div>
+                    </div>
+                    <div class="home-cards-row" id="row-more-liked">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Smart Section: Continue explorando -->
+                <div class="home-section-wrap" id="section-smart-continue-exploring">
+                    <div class="home-section-head">
+                        <div>
+                            <h2 id="title-continue-exploring">Continue explorando 🧭 <span class="section-badge" id="badge-continue-exploring">Recentes</span></h2>
+                            <p class="section-subtitle" id="sub-continue-exploring">Recomendações geradas a partir das suas últimas audições</p>
+                        </div>
+                    </div>
+                    <div class="home-cards-row" id="row-continue-exploring">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Section: Navegar por Estilos & Gêneros -->
+                <div class="home-section-wrap" id="section-genres-home">
+                    <div class="home-section-head">
+                        <h2>Estilos & Gêneros Musicais 🎸🎧</h2>
+                        <span class="show-all-link" id="link-show-all-genres">Mostrar tudo</span>
+                    </div>
+                    <div class="genres-cards-row" id="home-genres-row">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Section: Músicas em Alta -->
+                <div class="home-section-wrap" id="section-trending-home">
+                    <div class="home-section-head">
+                        <h2>Músicas em Alta no Momento 🔥</h2>
+                    </div>
+                    <div class="home-cards-row" id="home-recent-row">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Section: Artistas da Biblioteca (Spotify Circular Cards) -->
+                <div class="home-section-wrap" id="section-artists-home">
+                    <div class="home-section-head">
+                        <h2>Artistas Populares no Mundo 🌟</h2>
+                    </div>
+                    <div class="home-cards-row" id="home-artists-row">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Section: Álbuns em Destaque -->
+                <div class="home-section-wrap" id="section-albums-home">
+                    <div class="home-section-head">
+                        <h2>Álbuns em Destaque 💿</h2>
+                    </div>
+                    <div class="home-cards-row" id="home-recommended-row">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Genres Grid -->
+            <section id="view-genres-grid" class="view">
+                <div style="padding: 24px 24px 8px 24px;">
+                    <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">Estilos & Gêneros Musicais</h1>
+                    <p style="color: var(--text-subdued); font-size: 14px;" id="genres-grid-count">Músicas categorizadas automaticamente por inteligência e estilo</p>
+                </div>
+                <div class="genres-grid-container" id="all-genres-grid-container" style="padding: 16px 24px 32px 24px;">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- View: Albums Grid -->
+            <section id="view-albums-grid" class="view">
+                <div style="padding: 24px 24px 8px 24px;">
+                    <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">Álbuns em Alta</h1>
+                    <p style="color: var(--text-subdued); font-size: 14px;" id="albums-grid-count">Álbuns mais populares no mundo</p>
+                </div>
+                <div class="home-cards-row" id="all-albums-grid-container" style="padding: 16px 24px 32px 24px;">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- View: Artists Grid -->
+            <section id="view-artists-grid" class="view">
+                <div style="padding: 24px 24px 8px 24px;">
+                    <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">Artistas em Alta</h1>
+                    <p style="color: var(--text-subdued); font-size: 14px;" id="artists-grid-count">Artistas mais ouvidos no momento</p>
+                </div>
+                <div class="home-cards-row" id="all-artists-grid-container" style="padding: 16px 24px 32px 24px;">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- View: Playlist / Album Detail Table View -->
+            <section id="view-playlist" class="view">
+                <div class="playlist-hero-banner" id="pl-banner">
+                    <div class="pl-hero-cover-wrap">
+                        <img id="pl-cover" src="" alt="Capa">
+                    </div>
+                    <div class="pl-hero-info">
+                        <span class="pl-type-label" id="pl-type">Playlist</span>
+                        <h1 class="pl-title-heading" id="pl-title">Nome</h1>
+                        <p class="pl-desc-text" id="pl-desc">Descrição</p>
+                        <div class="pl-stats-row">
+                            <span id="pl-author">SpotCry</span>
+                            <span>•</span>
+                            <span id="pl-count">0 músicas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pl-action-bar">
+                    <button class="pl-big-play-btn" id="btn-pl-play-all" title="Reproduzir todas em sequência">
+                        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z" fill="#000"/></svg>
+                    </button>
+                    <button class="icon-round-btn heart-btn" id="btn-pl-like">
+                        <svg viewBox="0 0 16 16" width="24" height="24"><path d="M1.626 3.161a2.766 2.766 0 0 1 3.91 0l.464.465.465-.465a2.766 2.766 0 0 1 3.91 3.91l-4.375 4.375-4.374-4.375a2.766 2.766 0 0 1 0-3.91zM2.686 4.22a1.266 1.266 0 0 0 0 1.79l3.315 3.314 3.314-3.314a1.266 1.266 0 0 0-1.79-1.79l-1.524 1.524-1.524-1.524a1.266 1.266 0 0 0-1.791 0z" fill="currentColor"/></svg>
+                    </button>
+                    <!-- Playlist Custom Actions (Editar & Excluir) -->
+                    <button class="icon-round-btn" id="btn-pl-edit" title="Editar Detalhes da Playlist" style="display: none;">
+                        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354l-1.086-1.086zM9.75 4.811L3.929 10.632a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064L11.189 6.25 9.75 4.81z"/></svg>
+                    </button>
+                    <button class="icon-round-btn" id="btn-pl-delete" title="Excluir Playlist" style="display: none; color: #ff5555;">
+                        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM6.5 1.5h3a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25zM4.5 5v8.25c0 .69.56 1.25 1.25 1.25h4.5c.69 0 1.25-.56 1.25-1.25V5h1.5v8.25A2.75 2.75 0 0 1 10.25 16h-4.5A2.75 2.75 0 0 1 3 13.25V5h1.5zm2 2.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5a.75.75 0 0 1 .75-.75zm3 0a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5a.75.75 0 0 1 .75-.75z"/></svg>
+                    </button>
+
+                    <!-- Playlist & Liked Songs Controls (Search, Sort, Offline filter) -->
+                    <div class="pl-controls-right" id="pl-controls-right">
+                        <div class="pl-table-search-wrap" id="pl-table-search-wrap">
+                            <svg class="search-icon" viewBox="0 0 16 16" width="14" height="14"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06l-3.185-3.184A6.75 6.75 0 0 1 .25 7z" fill="currentColor"/></svg>
+                            <input type="text" id="pl-table-filter-input" placeholder="Buscar nesta biblioteca..." autocomplete="off">
+                            <button type="button" id="pl-table-filter-clear" class="search-clear-btn" style="display:none;" title="Limpar filtro">✕</button>
+                        </div>
+                        <div class="pl-sort-dropdown-wrap">
+                            <select id="pl-sort-select" class="pl-sort-select" title="Ordenar músicas">
+                                <option value="default">Ordem Padrão (Curtidas Recentes)</option>
+                                <option value="title">Título</option>
+                                <option value="artist">Artista</option>
+                                <option value="album">Álbum</option>
+                                <option value="duration">Duração</option>
+                                <option value="date">Data</option>
+                            </select>
+                        </div>
+                        <button type="button" class="pill-chip offline-filter-pill" id="pl-filter-offline-btn" title="Exibir apenas faixas disponíveis offline">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm-1 14.17l-3.59-3.58 1.41-1.41L11 13.34V6h2v7.34l2.18-2.17 1.41 1.41z"/></svg>
+                            <span>Baixadas (Offline)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Time Period Filter Pills (Day / Week / Month) -->
+                <div class="period-pills-row" id="period-pills-bar" style="display:none; padding: 0 24px 16px 24px; gap: 8px;">
+                    <button class="pill-chip active" data-period="all">Geral (Total)</button>
+                    <button class="pill-chip" data-period="day">Hoje (24h)</button>
+                    <button class="pill-chip" data-period="week">Esta Semana (7 dias)</button>
+                    <button class="pill-chip" data-period="month">Este Mês (30 dias)</button>
+                </div>
+
+                <div class="track-table-container">
+                    <table class="track-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;">#</th>
+                                <th>Título</th>
+                                <th>Álbum</th>
+                                <th id="th-date-col">Data adicionada</th>
+                                <th style="text-align: right; padding-right: 32px;">
+                                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fill="currentColor"/><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z" fill="currentColor"/></svg>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="pl-track-tbody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Add Tracks to Playlist Search Section (Spotify Feature) -->
+                <div id="pl-add-tracks-section" class="pl-add-tracks-section" style="display: none; padding: 32px 24px 48px 24px;">
+                    <div class="pl-add-tracks-divider"></div>
+                    <div class="pl-add-tracks-head" style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">Vamos encontrar músicas para sua playlist</h2>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                            <div class="top-search-capsule" style="max-width: 420px; height: 40px; margin: 0;">
+                                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06l-3.185-3.184A6.75 6.75 0 0 1 .25 7z" fill="currentColor"/></svg>
+                                <input type="text" id="pl-search-tracks-input" placeholder="Buscar músicas na biblioteca..." autocomplete="off">
+                            </div>
+                            <div class="pl-quick-filter-chips" id="pl-finder-chips" style="display: flex; gap: 8px;">
+                                <button type="button" class="pill-chip active" data-finder-filter="all">Todas</button>
+                                <button type="button" class="pill-chip" data-finder-filter="favs">❤️ Curtidas</button>
+                                <button type="button" class="pill-chip" data-finder-filter="top">🔥 Mais Ouvidas</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pl-suggested-list" id="pl-search-results-list"></div>
+                </div>
+            </section>
+
+            <!-- View: Settings / Folders -->
+            <section id="view-settings" class="view">
+                <div style="padding: 32px 24px;">
+                    <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 24px;">Configurações</h1>
+                    <div class="settings-box">
+                        <h3>SpotCry 100% Online 🌐</h3>
+                        <p style="color: var(--text-subdued); font-size: 13px; margin: 8px 0 16px 0;">O aplicativo opera em modo 100% streaming online. Pesquise e toque qualquer artista, álbum ou música sem precisar de arquivos locais no computador.</p>
+                        <div style="display: flex; gap: 12px; align-items: center; background: rgba(30, 215, 96, 0.1); border: 1px solid rgba(30, 215, 96, 0.3); padding: 14px 18px; border-radius: var(--radius-md);">
+                            <span style="font-size: 20px;">⚡</span>
+                            <div>
+                                <div style="font-weight: 700; color: #1ed760; font-size: 14px;">Streaming de Alta Fidelidade Ativo</div>
+                                <div style="color: var(--text-subdued); font-size: 12px;">Transmissão instantânea de áudio completo em qualidade estúdio.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-box" style="margin-top: 24px;">
+                        <h3>Áudio & Efeitos</h3>
+                        <p style="color: var(--text-subdued); font-size: 13px; margin: 8px 0 16px 0;">Ajuste a transição suave de áudio entre as faixas.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 420px; background: var(--bg-card); padding: 14px 18px; border-radius: var(--radius-md);">
+                            <span>Crossfade (Transição Suave)</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="range" id="crossfade-slider" min="0" max="10" value="0" style="width: 100px;">
+                                <span id="crossfade-val" style="font-weight: 700; width: 32px; font-size: 13px;">0s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-box" style="margin-top: 24px;">
+                        <h3>Sistema & Desktop</h3>
+                        <p style="color: var(--text-subdued); font-size: 13px; margin: 8px 0 16px 0;">Comportamento da janela e bandeja do sistema (Windows Tray).</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 480px; background: var(--bg-card); padding: 14px 18px; border-radius: var(--radius-md);">
+                            <div>
+                                <div style="font-weight: 600; font-size: 14px;">Minimizar para a Bandeja ao fechar</div>
+                                <div style="color: var(--text-subdued); font-size: 12px; margin-top: 2px;">Mantém as músicas tocando em segundo plano perto do relógio</div>
+                            </div>
+                            <label class="switch-toggle">
+                                <input type="checkbox" id="sett-tray-checkbox" checked>
+                                <span class="slider-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-box" style="margin-top: 24px;">
+                        <h3>Atalhos Rápidos de Teclado</h3>
+                        <p style="color: var(--text-subdued); font-size: 13px; margin: 8px 0 16px 0;">Controle suas músicas direto do teclado a qualquer momento.</p>
+                        <div class="shortcuts-grid">
+                            <div class="shortcut-item"><kbd>Espaço</kbd><span>Reproduzir / Pausar</span></div>
+                            <div class="shortcut-item"><kbd>→</kbd> / <kbd>←</kbd><span>Avançar / Voltar 5s</span></div>
+                            <div class="shortcut-item"><kbd>Ctrl + →</kbd><span>Próxima Faixa</span></div>
+                            <div class="shortcut-item"><kbd>Ctrl + ←</kbd><span>Faixa Anterior</span></div>
+                            <div class="shortcut-item"><kbd>↑</kbd> / <kbd>↓</kbd><span>Ajustar Volume</span></div>
+                            <div class="shortcut-item"><kbd>M</kbd><span>Ativar / Desativar Mudo</span></div>
+                            <div class="shortcut-item"><kbd>L</kbd><span>Abrir Letras Sincronizadas</span></div>
+                            <div class="shortcut-item"><kbd>F</kbd><span>Modo Tela Cheia</span></div>
+                            <div class="shortcut-item"><kbd>Esc</kbd><span>Fechar Janelas e Modais</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Artist Profile View -->
+            <section id="view-artist" class="view">
+                <div class="artist-hero-banner" id="artist-banner">
+                    <div class="artist-hero-info">
+                        <div class="artist-verified-badge">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#3D91F4"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <span>Artista verificado</span>
+                        </div>
+                        <h1 class="artist-name-heading" id="artist-page-name">Nome do Artista</h1>
+                        <p class="artist-stats-text" id="artist-page-stats">0 ouvintes • 0 músicas</p>
+                    </div>
+                </div>
+
+                <div class="pl-action-bar">
+                    <button class="pl-big-play-btn" id="btn-artist-play-all" title="Tocar Artista">
+                        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z" fill="#000"/></svg>
+                    </button>
+                    <button class="artist-follow-btn" id="btn-artist-follow">Seguindo</button>
+                    <button class="icon-round-btn artist-action-icon" id="btn-artist-shuffle" title="Ordem Aleatória">
+                        <svg viewBox="0 0 16 16" width="20" height="20"><path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.39a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.98 3.75 13.15.922zM.39 3.5H0V2h.39a3.75 3.75 0 0 1 2.873 1.34l1.796 2.14a.75.75 0 1 1-1.15.965L2.113 4.304A2.25 2.25 0 0 0 .39 3.5zm11.533 6.953a.75.75 0 0 1 1.06.027l2.997 3.272-2.997 3.27a.75.75 0 1 1-1.087-1.034l1.503-1.642H11.16a2.25 2.25 0 0 1-1.724-.804l-1.797-2.14a.75.75 0 0 1 1.15-.965l1.797 2.14a.75.75 0 0 0 .574.269h2.24l-1.503-1.643a.75.75 0 0 1 .027-1.06z" fill="currentColor"/></svg>
+                    </button>
+                </div>
+
+                <!-- Artist Section: Mais Populares (Top 5) -->
+                <div style="padding: 0 24px 20px 24px;">
+                    <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Populares</h2>
+                    <table class="track-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;">#</th>
+                                <th style="width: 44%;">Título</th>
+                                <th style="width: 32%;">Álbum</th>
+                                <th style="width: 14%;">Data</th>
+                                <th style="width: 10%; text-align: right; padding-right: 28px;">
+                                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fill="currentColor"/><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z" fill="currentColor"/></svg>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="artist-top-tbody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Artist Section: Discografia / Álbuns -->
+                <div style="padding: 10px 24px 24px 24px;" id="artist-albums-section">
+                    <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Discografia & Álbuns</h2>
+                    <div class="home-cards-row" id="artist-albums-row"></div>
+                </div>
+
+                <!-- Artist Section: Todas as faixas -->
+                <div style="padding: 10px 24px 40px 24px;">
+                    <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Todas as Músicas</h2>
+                    <table class="track-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;">#</th>
+                                <th style="width: 44%;">Título</th>
+                                <th style="width: 32%;">Álbum</th>
+                                <th style="width: 14%;">Data</th>
+                                <th style="width: 10%; text-align: right; padding-right: 28px;">
+                                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fill="currentColor"/><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z" fill="currentColor"/></svg>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="artist-all-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- View: Lyrics Screen (Sincronizadas) -->
+            <section id="view-lyrics" class="view">
+                <div class="lyrics-view-container">
+                    <div class="lyrics-bg-glow" id="lyrics-bg-glow"></div>
+                    <div class="lyrics-header">
+                        <div class="lyrics-track-info">
+                            <img id="lyrics-track-cover" src="" alt="Capa">
+                            <div>
+                                <h2 id="lyrics-track-title">Música</h2>
+                                <p id="lyrics-track-artist">Artista</p>
+                            </div>
+                        </div>
+                        <button class="icon-round-btn" id="btn-close-lyrics" title="Fechar Letras">
+                            <svg viewBox="0 0 16 16" width="18" height="18"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                        </button>
+                    </div>
+                    <div class="lyrics-scroll-box" id="lyrics-lines-container">
+                        <div class="lyrics-status-msg" id="lyrics-status-msg">Carregando letra...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Spotify Search & Downloader Engine -->
+            <section id="view-online-search" class="view">
+                <!-- Spotify Search Pills Filter Bar -->
+                <div class="sp-search-pills-bar" id="sp-search-pills-bar" style="display: none;">
+                    <button class="pill-chip active" data-sp-filter="all">Tudo</button>
+                    <button class="pill-chip" data-sp-filter="songs">Músicas</button>
+                    <button class="pill-chip" data-sp-filter="artists">Artistas</button>
+                    <button class="pill-chip" data-sp-filter="albums">Álbuns</button>
+                </div>
+
+                <!-- State 1: Browse All / Categorias (Spotify Browse All / Navegar por tudo) -->
+                <div id="sp-search-browse-section" class="sp-browse-section">
+                    <div class="sp-browse-header">
+                        <h1 class="sp-browse-title">Navegar por todas as seções</h1>
+                    </div>
+                    <div class="sp-browse-cards-grid" id="sp-browse-categories-grid">
+                        <!-- Spotify Genre / Category Cards Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- State 2: Results View (Spotify Search Results) -->
+                <div id="sp-search-results-section" class="sp-results-section" style="display: none;">
+                    <!-- Loading Spinner -->
+                    <div id="online-search-loading" class="online-loading-spinner" style="display: none;">
+                        <div class="spotcry-spinner"></div>
+                        <span>Pesquisando no Spotify Web...</span>
+                    </div>
+
+                    <!-- No Results Found State (Safe Container) -->
+                    <div id="sp-search-no-results" style="display: none; text-align: center; padding: 80px 20px; color: var(--text-subdued);">
+                        <h2 id="sp-no-results-title" style="font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px;">Nenhum resultado encontrado</h2>
+                        <p style="font-size: 14px;">Verifique se as palavras estão corretas ou tente buscar por outros artistas, álbuns ou músicas.</p>
+                    </div>
+
+                    <!-- Top Split Row: "Melhor resultado" (left) + "Músicas" (right) -->
+                    <div class="sp-search-top-split" id="sp-search-top-split">
+                        <!-- Top Result Card (Left) -->
+                        <div class="sp-top-result-col">
+                            <h2 class="sp-section-heading">Melhor resultado</h2>
+                            <div class="sp-top-result-card" id="sp-top-result-card">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Top Songs List (Right) -->
+                        <div class="sp-songs-list-col">
+                            <h2 class="sp-section-heading">Músicas</h2>
+                            <div class="sp-songs-list" id="sp-songs-list">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: Artistas -->
+                    <div class="sp-section-wrap" id="sp-artists-wrap" style="display: none;">
+                        <div class="sp-section-head-row">
+                            <h2 class="sp-section-heading">Artistas</h2>
+                        </div>
+                        <div class="sp-cards-grid" id="sp-artists-grid">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Section: Álbuns -->
+                    <div class="sp-section-wrap" id="sp-albums-wrap" style="display: none;">
+                        <div class="sp-section-head-row">
+                            <h2 class="sp-section-heading">Álbuns</h2>
+                        </div>
+                        <div class="sp-cards-grid" id="sp-albums-grid">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+
+
+
+                    <!-- Bottom Grid: "Mais Músicas" -->
+                    <div class="sp-more-results-wrap" id="sp-more-results-wrap">
+                        <div class="sp-section-head-row">
+                            <h2 class="sp-section-heading" id="sp-more-results-title">Mais Músicas</h2>
+                        </div>
+                        <div class="sp-cards-grid" id="online-results-grid">
+                            <!-- Spotify Grid Cards Injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Queue Drawer (Slide-Over Panel) -->
+    <div id="queue-drawer" class="queue-drawer" role="dialog" aria-label="Fila de Reprodução">
+        <div class="queue-drawer-header">
+            <div class="queue-header-left">
+                <h3 class="queue-header-title">Fila de Reprodução</h3>
+                <span class="queue-badge" id="queue-count-badge" style="display:none;">0</span>
+            </div>
+            <div class="queue-header-right">
+                <button class="queue-clear-btn" id="btn-clear-queue" title="Limpar próximas faixas da fila">Limpar fila</button>
+                <button class="icon-round-btn queue-close-btn" id="btn-close-queue" title="Fechar Fila (Esc)" aria-label="Fechar Fila">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="queue-clear-confirm-bar" id="queue-clear-confirm" style="display: none;">
+            <span class="queue-clear-confirm-text">Limpar próximas faixas da fila?</span>
+            <div class="queue-clear-confirm-btns">
+                <button class="queue-confirm-action-btn confirm" id="btn-confirm-clear">Limpar</button>
+                <button class="queue-confirm-action-btn cancel" id="btn-cancel-clear">Cancelar</button>
+            </div>
+        </div>
+        <div class="queue-drawer-content" id="queue-drawer-content">
+            <!-- Now Playing & Next in queue injected via JS -->
+        </div>
+    </div>
+
+    <!-- Queue Item Context Menu (Three Dots) -->
+    <div id="queue-context-menu" class="queue-context-menu" style="display: none;">
+        <button class="queue-ctx-item" id="queue-ctx-play-now">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>
+            <span>Tocar agora</span>
+        </button>
+        <button class="queue-ctx-item" id="queue-ctx-play-next">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>
+            <span>Tocar a seguir</span>
+        </button>
+        <div class="queue-ctx-divider"></div>
+        <button class="queue-ctx-item queue-ctx-danger" id="queue-ctx-remove">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H14a.5.5 0 0 1 0 1h-.6l-.8 10.1A1.5 1.5 0 0 1 11.1 15H4.9a1.5 1.5 0 0 1-1.5-1.4L2.6 3.5H2a.5.5 0 0 1 0-1h4v-1a.5.5 0 0 1 .5-.5zM4.4 3.5l.8 10.05a.5.5 0 0 0 .5.45h6.2a.5.5 0 0 0 .5-.45L13.2 3.5H4.4zM6 5.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5z"/></svg>
+            <span>Remover da fila</span>
+        </button>
+    </div>
+
+    <!-- Equalizer Modal -->
+    <div id="equalizer-modal" class="modal-backdrop">
+        <div class="equalizer-card">
+            <div class="modal-head">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="#1ED760"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
+                    <h2>Equalizador de Áudio</h2>
+                </div>
+                <button class="icon-round-btn" id="btn-close-eq">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+
+            <!-- Presets Row -->
+            <div class="eq-presets-bar">
+                <button class="pill-chip active" data-eq="flat">Padrão (Flat)</button>
+                <button class="pill-chip" data-eq="bass">Bass Boost 🔊</button>
+                <button class="pill-chip" data-eq="rock">Rock 🎸</button>
+                <button class="pill-chip" data-eq="pop">Pop 🎤</button>
+                <button class="pill-chip" data-eq="vocal">Vocal / Acústico</button>
+                <button class="pill-chip" data-eq="club">Eletrônica / Dance</button>
+                <button class="pill-chip" data-eq="treble">Agudos (Treble)</button>
+            </div>
+
+            <!-- Sliders Frequencies Container -->
+            <div class="eq-sliders-grid">
+                <div class="eq-band">
+                    <span class="eq-gain-val" id="eq-val-0">0 dB</span>
+                    <input type="range" class="eq-vertical-slider" id="eq-band-0" min="-12" max="12" value="0" orient="vertical">
+                    <span class="eq-freq-label">60 Hz<br><small>Sub-Grave</small></span>
+                </div>
+                <div class="eq-band">
+                    <span class="eq-gain-val" id="eq-val-1">0 dB</span>
+                    <input type="range" class="eq-vertical-slider" id="eq-band-1" min="-12" max="12" value="0" orient="vertical">
+                    <span class="eq-freq-label">250 Hz<br><small>Grave</small></span>
+                </div>
+                <div class="eq-band">
+                    <span class="eq-gain-val" id="eq-val-2">0 dB</span>
+                    <input type="range" class="eq-vertical-slider" id="eq-band-2" min="-12" max="12" value="0" orient="vertical">
+                    <span class="eq-freq-label">1 kHz<br><small>Médio</small></span>
+                </div>
+                <div class="eq-band">
+                    <span class="eq-gain-val" id="eq-val-3">0 dB</span>
+                    <input type="range" class="eq-vertical-slider" id="eq-band-3" min="-12" max="12" value="0" orient="vertical">
+                    <span class="eq-freq-label">4 kHz<br><small>Presença</small></span>
+                </div>
+                <div class="eq-band">
+                    <span class="eq-gain-val" id="eq-val-4">0 dB</span>
+                    <input type="range" class="eq-vertical-slider" id="eq-band-4" min="-12" max="12" value="0" orient="vertical">
+                    <span class="eq-freq-label">12 kHz<br><small>Agudo</small></span>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: space-between; margin-top: 24px;">
+                <button class="btn-spotify-secondary" id="btn-reset-eq">Restaurar Padrão</button>
+                <button class="btn-spotify-primary" id="btn-done-eq">Salvar Ajustes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Player Modal / Overlay -->
+    <div id="view-fullscreen-player" class="fullscreen-player-overlay">
+        <div class="fs-ambient-backdrop" id="fs-backdrop"></div>
+        <button class="fs-close-btn" id="btn-close-fullscreen" title="Sair da Tela Cheia">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-14v3h3v2h-5V5h2z" fill="currentColor"/></svg>
+        </button>
+
+        <div class="fs-content-wrap">
+            <div class="fs-cover-box">
+                <img id="fs-cover" src="" alt="Capa em Tela Cheia">
+            </div>
+            <div class="fs-meta-box">
+                <h1 id="fs-title">Título da Música</h1>
+                <p id="fs-artist">Artista</p>
+                <p id="fs-album" style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Álbum</p>
+            </div>
+
+            <div class="fs-scrubber-box">
+                <div class="range-wrap" style="width: 100%;">
+                    <input type="range" id="fs-progress-slider" min="0" max="100" value="0">
+                </div>
+                <div class="fs-time-labels">
+                    <span id="fs-time-current">0:00</span>
+                    <span id="fs-time-total">0:00</span>
+                </div>
+            </div>
+
+            <div class="fs-controls-box">
+                <button class="player-ctrl-btn" id="btn-fs-shuffle" title="Aleatório">
+                    <svg viewBox="0 0 16 16" width="20" height="20"><path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.391a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.98 3.75 13.15.922zM.391 3.5H0V2h.391c1.109 0 2.16.49 2.873 1.34L4.89 5.277l-.979 1.167-1.796-2.14A2.25 2.25 0 0 0 .39 3.5zM7.5 10.723l.98-1.167 1.796 2.14A2.25 2.25 0 0 0 11.999 12.5h1.947l-1.017-1.018a.75.75 0 1 1 1.06-1.06l2.829 2.828-2.829 2.828a.75.75 0 1 1-1.06-1.06L13.946 14h-1.947a3.75 3.75 0 0 1-2.873-1.34l-1.626-1.937z" fill="currentColor"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-fs-prev" title="Anterior">
+                    <svg viewBox="0 0 16 16" width="22" height="22"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z" fill="currentColor"/></svg>
+                </button>
+                <button class="fs-play-circle" id="btn-fs-play" title="Reproduzir / Pausar">
+                    <svg id="icon-fs-play" viewBox="0 0 16 16" width="24" height="24"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z" fill="#000"/></svg>
+                    <svg id="icon-fs-pause" viewBox="0 0 16 16" width="24" height="24" style="display:none;"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z" fill="#000"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-fs-next" title="Próxima">
+                    <svg viewBox="0 0 16 16" width="22" height="22"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z" fill="currentColor"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-fs-repeat" title="Repetir">
+                    <svg viewBox="0 0 16 16" width="20" height="20"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5z" fill="currentColor"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Spotify-style Context Menu -->
+    <div id="custom-context-menu" class="custom-context-menu">
+        <div class="ctx-item" id="ctx-play-now">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z" fill="currentColor"/></svg>
+            <span>Tocar Agora</span>
+        </div>
+        <div class="ctx-item" id="ctx-play-next">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z" fill="currentColor"/></svg>
+            <span>Tocar a Seguir</span>
+        </div>
+        <div class="ctx-item" id="ctx-add-queue">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z" fill="currentColor"/></svg>
+            <span>Adicionar à Fila</span>
+        </div>
+        <div class="ctx-divider"></div>
+        <div class="ctx-item" id="ctx-toggle-fav">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M1.626 3.161a2.766 2.766 0 0 1 3.91 0l.464.465.465-.465a2.766 2.766 0 0 1 3.91 3.91l-4.375 4.375-4.374-4.375a2.766 2.766 0 0 1 0-3.91z" fill="currentColor"/></svg>
+            <span id="ctx-fav-label">Curtir</span>
+        </div>
+        <div class="ctx-item ctx-has-sub" id="ctx-playlists-parent">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z" fill="currentColor"/></svg>
+            <span>Adicionar à Playlist</span>
+            <div class="ctx-submenu" id="ctx-playlists-submenu"></div>
+        </div>
+        <div class="ctx-divider"></div>
+        <div class="ctx-item" id="ctx-edit-tags">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354l-1.086-1.086zM9.75 4.811L3.929 10.632a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064L11.189 6.25 9.75 4.81z" fill="currentColor"/></svg>
+            <span>Editar Informações (Tags)</span>
+        </div>
+        <div class="ctx-item" id="ctx-go-artist">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0-2.21-3.58-3.5-6-3.5S2 10.79 2 13v1h12v-1z" fill="currentColor"/></svg>
+            <span>Ir para o Artista</span>
+        </div>
+        <div class="ctx-item" id="ctx-go-album">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" fill="currentColor"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
+            <span>Ir para o Álbum</span>
+        </div>
+        <div class="ctx-divider"></div>
+        <div class="ctx-item" id="ctx-download-track" style="display: none;">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.75a.75.75 0 0 1 .75.75v7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 1 1 1.06-1.06l2.72 2.72V2.5A.75.75 0 0 1 8 1.75zM1.75 12.25a.75.75 0 0 1 .75.75v1.25c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V13a.75.75 0 0 1 1.5 0v1.25A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V13a.75.75 0 0 1 .75-.75z" fill="currentColor"/></svg>
+            <span>Baixar Música</span>
+        </div>
+
+        <div class="ctx-item ctx-danger" id="ctx-remove-from-pl" style="display: none;">
+            <svg viewBox="0 0 16 16" width="16" height="16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm4 7.25h8v1.5H4v-1.5z" fill="currentColor"/></svg>
+            <span>Remover desta Playlist</span>
+        </div>
+    </div>
+
+    <!-- Edit Track Tags Modal -->
+    <div id="edit-tags-modal" class="modal-backdrop">
+        <div class="playlist-modal-card" style="max-width: 500px; padding: 24px 28px;">
+            <div class="modal-head" style="margin-bottom: 20px;">
+                <h2 style="font-size: 20px; font-weight: 800;">Editar Informações da Música</h2>
+                <button class="icon-round-btn" id="btn-close-edit-tags" title="Fechar">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="pl-input-group">
+                    <label class="pl-field-label">Título da Faixa</label>
+                    <input type="text" id="edit-tag-title" placeholder="Nome da música" autocomplete="off">
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <div class="pl-input-group" style="flex: 1;">
+                        <label class="pl-field-label">Artista</label>
+                        <input type="text" id="edit-tag-artist" placeholder="Nome do Artista" autocomplete="off">
+                    </div>
+                    <div class="pl-input-group" style="flex: 1;">
+                        <label class="pl-field-label">Álbum</label>
+                        <input type="text" id="edit-tag-album" placeholder="Nome do Álbum" autocomplete="off">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <div class="pl-input-group" style="flex: 2;">
+                        <label class="pl-field-label">Gênero / Estilo</label>
+                        <input type="text" id="edit-tag-genre" placeholder="Ex: Rock, Pop, Trap" autocomplete="off">
+                    </div>
+                    <div class="pl-input-group" style="flex: 1;">
+                        <label class="pl-field-label">Ano</label>
+                        <input type="number" id="edit-tag-year" placeholder="2024" min="1900" max="2100">
+                    </div>
+                    <div class="pl-input-group" style="flex: 1;">
+                        <label class="pl-field-label">Nº Faixa</label>
+                        <input type="number" id="edit-tag-trackno" placeholder="1" min="0" max="999">
+                    </div>
+                </div>
+                <p style="color: var(--text-subdued); font-size: 12px; margin-top: 2px;">
+                    💡 As alterações são gravadas na biblioteca e diretamente no arquivo de áudio.
+                </p>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                <button class="btn-spotify-secondary" id="btn-cancel-edit-tags">Cancelar</button>
+                <button class="btn-spotify-primary" id="btn-save-edit-tags">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Create / Edit Modal -->
+    <div id="playlist-modal" class="modal-backdrop">
+        <div class="playlist-modal-card">
+            <div class="modal-head">
+                <h2 id="playlist-modal-title">Criar Playlist</h2>
+                <button class="icon-round-btn" id="btn-close-playlist-modal" title="Fechar">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            
+            <div class="pl-modal-body">
+                <!-- Left: Visual Cover / Gradient Preview & Theme Picker -->
+                <div class="pl-modal-left">
+                    <div class="pl-modal-cover-preview" id="pl-modal-cover-preview">
+                        <svg viewBox="0 0 24 24" width="56" height="56" fill="rgba(255,255,255,0.75)">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </div>
+                    <label class="pl-field-label" style="text-align: center; margin-top: 14px;">Cor do Tema</label>
+                    <div class="pl-color-palette" id="pl-color-palette">
+                        <button type="button" class="pl-color-dot active" data-gradient="emerald" title="Esmeralda" style="background: linear-gradient(135deg, #10b981, #047857);"></button>
+                        <button type="button" class="pl-color-dot" data-gradient="purple" title="Roxo Imperial" style="background: linear-gradient(135deg, #8b5cf6, #4c1d95);"></button>
+                        <button type="button" class="pl-color-dot" data-gradient="ocean" title="Oceano" style="background: linear-gradient(135deg, #06b6d4, #0e7490);"></button>
+                        <button type="button" class="pl-color-dot" data-gradient="sunset" title="Pôr do Sol" style="background: linear-gradient(135deg, #f59e0b, #dc2626);"></button>
+                        <button type="button" class="pl-color-dot" data-gradient="neon" title="Neon Cyber" style="background: linear-gradient(135deg, #ec4899, #be185d);"></button>
+                        <button type="button" class="pl-color-dot" data-gradient="midnight" title="Meia-Noite" style="background: linear-gradient(135deg, #3b82f6, #1e3a8a);"></button>
+                    </div>
+                </div>
+
+                <!-- Right: Form Fields -->
+                <div class="pl-modal-right">
+                    <div class="pl-input-group">
+                        <label for="playlist-name-input" class="pl-field-label">Nome da Playlist</label>
+                        <input type="text" id="playlist-name-input" placeholder="Minha Playlist #1" maxlength="60" autocomplete="off">
+                    </div>
+                    <div class="pl-input-group" style="margin-top: 16px;">
+                        <label for="playlist-desc-input" class="pl-field-label">Descrição (opcional)</label>
+                        <textarea id="playlist-desc-input" placeholder="Adicione uma descrição opcional para sua playlist" rows="3" maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                <button class="btn-spotify-secondary" id="btn-cancel-playlist-modal">Cancelar</button>
+                <button class="btn-spotify-primary" id="btn-save-playlist-modal">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Playlist Confirmation Modal -->
+    <div id="delete-playlist-modal" class="modal-backdrop">
+        <div class="playlist-modal-card" style="max-width: 440px;">
+            <div class="modal-head">
+                <h2 style="font-size: 20px; font-weight: 800;">Excluir da Sua Biblioteca?</h2>
+                <button class="icon-round-btn" id="btn-close-delete-pl" title="Fechar">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            <p style="color: var(--text-subdued); font-size: 14px; line-height: 1.5; margin: 16px 0 24px 0;" id="delete-pl-message">
+                Isso vai excluir permanentemente a playlist da Sua Biblioteca. As músicas continuarão salvas no seu computador.
+            </p>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn-spotify-secondary" id="btn-cancel-delete-pl">Cancelar</button>
+                <button class="btn-spotify-primary" id="btn-confirm-delete-pl" style="background-color: #e22134; color: #fff;">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Add To Playlist Modal Picker -->
+    <div id="add-to-playlist-modal" class="modal-backdrop">
+        <div class="playlist-modal-card" style="max-width: 440px; padding: 22px 24px;">
+            <div class="modal-head" style="margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+                    <img id="pl-picker-track-cover" src="" alt="Capa" style="width: 44px; height: 44px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: #282828;">
+                    <div style="min-width: 0;">
+                        <h3 id="pl-picker-track-title" style="font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; margin-bottom: 2px;">Nome da Música</h3>
+                        <p id="pl-picker-track-artist" style="font-size: 12px; color: var(--text-subdued); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Artista</p>
+                    </div>
+                </div>
+                <button class="icon-round-btn" id="btn-close-pl-picker" title="Fechar">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+
+            <!-- Search inside playlist picker -->
+            <div style="margin-bottom: 12px;">
+                <input type="text" id="pl-picker-search-input" placeholder="Buscar nas suas playlists..." style="width: 100%; background: #3e3e3e; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; color: #fff; font-size: 13px; padding: 8px 14px; outline: none;">
+            </div>
+
+            <!-- Quick Create New Playlist Button inside picker -->
+            <button class="pl-picker-new-btn" id="btn-pl-picker-create-new">
+                <div class="pl-picker-new-icon">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z" fill="currentColor"/></svg>
+                </div>
+                <span>Nova Playlist</span>
+            </button>
+
+            <!-- List of Playlists with Instant Toggle Checkboxes -->
+            <div class="pl-picker-list" id="pl-picker-list">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                <button class="btn-spotify-primary" id="btn-done-pl-picker" style="padding: 8px 24px;">Concluído</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SpotCry Mobile & Connect Modal -->
+    <div id="connect-phone-modal" class="modal-backdrop">
+        <div class="connect-phone-dialog">
+            <div class="modal-head" style="margin-bottom: 0; padding: 20px 24px 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <div class="connect-phone-title-wrap">
+                    <div class="connect-phone-badge">SpotCry Connect 📱</div>
+                    <h2 style="font-size: 20px; font-weight: 800; color: #fff; margin: 0;">Conectar com Celular</h2>
+                </div>
+                <button class="icon-round-btn" id="btn-close-connect-modal" title="Fechar">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            <div class="connect-modal-body">
+                <div class="connect-qr-section">
+                    <div class="qr-frame">
+                        <img id="connect-qr-img" src="" alt="QR Code SpotCry Connect" style="display:none;">
+                        <div id="connect-qr-loading" class="qr-loading-spinner"></div>
+                    </div>
+                    <span class="qr-caption">Aponte a câmera do seu celular</span>
+                </div>
+                
+                <div class="connect-info-section">
+                    <div class="connect-status-pill">
+                        <span class="status-dot-pulse"></span>
+                        <span id="connect-status-text">Servidor Ativo na Rede Wi-Fi</span>
+                    </div>
+
+                    <p class="connect-desc">
+                        Acesse toda a sua biblioteca no Celular ou iPad (Safari / Chrome) com o mesmo visual moderno do Spotify, ou use como controle remoto do computador.
+                    </p>
+
+                    <div class="connect-url-box">
+                        <span class="connect-url-label">Link direto no navegador do celular ou iPad:</span>
+                        <div class="connect-url-input-wrap">
+                            <input type="text" id="connect-url-input" readonly value="Carregando endereço...">
+                            <button id="btn-copy-connect-url" class="btn-copy-url" title="Copiar link">Copiar</button>
+                        </div>
+                    </div>
+
+                    <div class="connect-features-list">
+                        <div class="connect-feat-item">
+                            <span class="feat-icon">⚡</span>
+                            <div>
+                                <strong>Aplicativo Web / PWA Completo (iPad & Celular)</strong>
+                                <small>No Safari do iPad, toque em "Compartilhar" ➔ "Adicionar à Tela de Início" para ter o app em tela cheia.</small>
+                            </div>
+                        </div>
+                        <div class="connect-feat-item">
+                            <span class="feat-icon">🎛️</span>
+                            <div>
+                                <strong>Controle Remoto SpotCry</strong>
+                                <small>Pause, avance músicas e alterne o som do PC à distância.</small>
+                            </div>
+                        </div>
+                        <div class="connect-feat-item">
+                            <span class="feat-icon">🎧</span>
+                            <div>
+                                <strong>Streaming Direto no Celular</strong>
+                                <small>Ouça com tela apagada e controle pela central de notificações do Android.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Playback Bar -->
+    <footer id="playback-bar">
+        <!-- Left: Track Meta -->
+        <div class="bar-left">
+            <img id="now-cover" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23535353'><rect width='24' height='24' fill='%23282828'/><path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z' fill='%23757575'/></svg>" alt="Capa">
+            <div class="bar-meta-text">
+                <span class="bar-track-title" id="now-title">Selecione uma música</span>
+                <span class="bar-track-artist clickable" id="now-artist" title="Ver Artista">SpotCry</span>
+            </div>
+            <button class="icon-round-btn heart-btn" id="btn-now-fav" title="Salvar em Músicas Curtidas">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M1.626 3.161a2.766 2.766 0 0 1 3.91 0l.464.465.465-.465a2.766 2.766 0 0 1 3.91 3.91l-4.375 4.375-4.374-4.375a2.766 2.766 0 0 1 0-3.91zM2.686 4.22a1.266 1.266 0 0 0 0 1.79l3.315 3.314 3.314-3.314a1.266 1.266 0 0 0-1.79-1.79l-1.524 1.524-1.524-1.524a1.266 1.266 0 0 0-1.791 0z" fill="currentColor"/></svg>
+            </button>
+            <button class="icon-round-btn" id="btn-now-add-pl" title="Adicionar à Playlist">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z" fill="currentColor"/></svg>
+            </button>
+        </div>
+
+        <!-- Center: Controls & Scrubber -->
+        <div class="bar-center">
+            <div class="player-buttons-row">
+                <button class="player-ctrl-btn" id="btn-shuffle" title="Aleatório">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.391a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.98 3.75 13.15.922zM.391 3.5H0V2h.391c1.109 0 2.16.49 2.873 1.34L4.89 5.277l-.979 1.167-1.796-2.14A2.25 2.25 0 0 0 .39 3.5zM7.5 10.723l.98-1.167 1.796 2.14A2.25 2.25 0 0 0 11.999 12.5h1.947l-1.017-1.018a.75.75 0 1 1 1.06-1.06l2.829 2.828-2.829 2.828a.75.75 0 1 1-1.06-1.06L13.946 14h-1.947a3.75 3.75 0 0 1-2.873-1.34l-1.626-1.937z" fill="currentColor"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-prev" title="Anterior">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z" fill="currentColor"/></svg>
+                </button>
+                <button class="player-play-circle" id="btn-play" title="Reproduzir / Pausar">
+                    <svg id="icon-play" viewBox="0 0 16 16" width="16" height="16"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z" fill="#000"/></svg>
+                    <svg id="icon-pause" viewBox="0 0 16 16" width="16" height="16" style="display:none;"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z" fill="#000"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-next" title="Próxima">
+                    <svg viewBox="0 0 16 16" width="16" height="16"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z" fill="currentColor"/></svg>
+                </button>
+                <button class="player-ctrl-btn" id="btn-repeat" title="Repetir">
+                    <svg id="icon-repeat" viewBox="0 0 16 16" width="16" height="16"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5z" fill="currentColor"/></svg>
+                    <svg id="icon-repeat-one" viewBox="0 0 16 16" width="16" height="16" style="display:none;"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h.75v1.5h-.75A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5zM12.25 1h-.75v1.5h.75A2.25 2.25 0 0 1 14.5 4.75v5a2.25 2.25 0 0 1-2.25 2.25H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a3.75 3.75 0 0 0 3.75-3.75v-5A3.75 3.75 0 0 0 12.25 1z" fill="currentColor"/><path d="M9.12 8V1H7.787c-.128.72-.76 1.293-1.787 1.313V3.36h1.57V8h1.55z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            <div class="scrubber-row">
+                <span class="time-label" id="time-current">0:00</span>
+                <div class="range-wrap">
+                    <input type="range" id="progress-slider" min="0" max="100" value="0">
+                </div>
+                <span class="time-label" id="time-total">0:00</span>
+            </div>
+        </div>
+
+        <!-- Right: Volume & Tools -->
+        <div class="bar-right">
+            <!-- Lyrics Button -->
+            <button class="player-ctrl-btn" id="btn-lyrics" title="Letras">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M13.426 2.574a2.831 2.831 0 0 0-4.797 1.55l3.247 3.246a2.832 2.832 0 0 0 1.55-4.796zM11.17 8.077L7.923 4.83l-5.6 5.601a.75.75 0 0 0-.203.376l-.8 3.5a.75.75 0 0 0 .904.904l3.5-.8a.75.75 0 0 0 .376-.203l5.07-5.131zm-7.07 4.978l-.448-.448.473-2.072 2.047 2.047-2.072.473z" fill="currentColor"/></svg>
+            </button>
+            <!-- Queue Button -->
+            <button class="player-ctrl-btn" id="btn-queue" title="Fila de Reprodução">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z" fill="currentColor"/></svg>
+            </button>
+            <!-- Sleep Timer Button -->
+            <button class="player-ctrl-btn" id="btn-sleep-timer" title="Temporizador de Sono (Sleep Timer)">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.756.756 0 0 1 6 .278z" fill="currentColor"/></svg>
+            </button>
+            <!-- Equalizer Button -->
+            <button class="player-ctrl-btn" id="btn-equalizer" title="Equalizador">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M10 2v2H6V2h4zM4 3h1.5v1H4V3zm7 0h1.5v1H11V3zm-1 9v2H6v-2h4zM4 13h1.5v1H4v-1zm7 0h1.5v1H11v-1zm2-5v2H2V8h11zm-8 0v2H4V8h1zm6 0v2h-1V8h1z" fill="currentColor"/></svg>
+            </button>
+            <!-- Fullscreen Player Button -->
+            <button class="player-ctrl-btn" id="btn-fullscreen" title="Tela Cheia">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h2.44a.75.75 0 0 1 0 1.5H2.5a.75.75 0 0 1-.75-.75v-3.75a.75.75 0 0 1 1.5 0v2.44l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94 0a.75.75 0 0 1 1.06 0l2.72 2.72v-2.44a.75.75 0 0 1 1.5 0v3.75a.75.75 0 0 1-.75.75h-3.75a.75.75 0 0 1 0-1.5h2.44l-2.72-2.72a.75.75 0 0 1 0-1.06zM2.5 1.75h3.75a.75.75 0 0 1 0 1.5H3.81l2.72 2.72a.75.75 0 1 1-1.06 1.06L2.75 4.31v2.44a.75.75 0 0 1-1.5 0V3a1.25 1.25 0 0 1 1.25-1.25zm11 0a1.25 1.25 0 0 1 1.25 1.25v3.75a.75.75 0 0 1-1.5 0V4.31l-2.72 2.72a.75.75 0 0 1-1.06-1.06l2.72-2.72h-2.44a.75.75 0 0 1 0-1.5h3.75z" fill="currentColor"/></svg>
+            </button>
+            <button class="player-ctrl-btn" id="btn-mute" title="Volume">
+                <svg id="icon-vol-high" viewBox="0 0 16 16" width="16" height="16"><path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 4.29V5.56a2.75 2.75 0 0 1 0 4.88zM11.5 13.614a5.752 5.752 0 0 0 0-11.228v1.55a4.252 4.252 0 0 1 0 8.127v1.55z" fill="currentColor"/></svg>
+                <svg id="icon-vol-mute" viewBox="0 0 16 16" width="16" height="16" style="display:none;"><path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"/><path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z" fill="currentColor"/></svg>
+            </button>
+            <div class="vol-slider-container">
+                <input type="range" id="volume-slider" min="0" max="100" value="70">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sleep Timer Popover Menu -->
+    <div id="sleep-timer-menu" class="sleep-timer-menu">
+        <div class="sleep-timer-head">
+            <span>Temporizador de Sono 🌙</span>
+            <span id="sleep-timer-status" class="sleep-timer-badge" style="display: none;">Ativo</span>
+        </div>
+        <div class="sleep-timer-item" data-timer="0">Desativar Temporizador</div>
+        <div class="sleep-timer-item" data-timer="15">15 Minutos</div>
+        <div class="sleep-timer-item" data-timer="30">30 Minutos</div>
+        <div class="sleep-timer-item" data-timer="45">45 Minutos</div>
+        <div class="sleep-timer-item" data-timer="60">1 Hora</div>
+        <div class="sleep-timer-item" data-timer="end_of_track">Ao fim desta música</div>
+    </div>
+
+
+
+    <!-- Toast Notification -->
+    <div id="toast-notify" class="toast-popup">
+        <span id="toast-text">Notificação</span>
+    </div>
+    
+    <audio id="audio-player" preload="auto"></audio>
+    <script src="app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,848 @@
+/* ==========================================================================
+   SPOTCRY MOBILE - SPOTIFY ANDROID THEME & AESTHETICS
+   ========================================================================== */
+
+:root {
+    --bg-main: #121212;
+    --bg-surface: #181818;
+    --bg-card: #242424;
+    --bg-card-press: #2a2a2a;
+    --spotify-green: #1ED760;
+    --spotify-green-press: #1abc54;
+    --text-primary: #FFFFFF;
+    --text-secondary: #b3b3b3;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= Top App Bar ================= */
+.mobile-top-bar {
+    padding: 14px 16px 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(30, 30, 30, 0.6) 0%, rgba(18, 18, 18, 0) 100%);
+    z-index: 10;
+}
+
+.mobile-greeting {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.server-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #e22134;
+}
+
+.status-dot.connected {
+    background-color: var(--spotify-green);
+    box-shadow: 0 0 8px rgba(30, 215, 96, 0.6);
+}
+
+/* ================= Main Scroll Content ================= */
+.mobile-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 16px 120px 16px; /* space for mini player & nav */
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-tab-view {
+    display: none;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.mobile-tab-view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Headings */
+.mobile-sec-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 20px 0 12px 0;
+    letter-spacing: -0.3px;
+}
+
+/* Quick Mix 6-Card Grid (Spotify Style) */
+.mobile-quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.mobile-quick-card {
+    background: var(--bg-card);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 52px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.mobile-quick-card:active {
+    background: var(--bg-card-press);
+}
+
+.mobile-quick-thumb {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    background: #333;
+    object-fit: cover;
+}
+
+.mobile-quick-name {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 8px;
+    line-height: 1.2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Horizontal Track Cards Row */
+.mobile-horizontal-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+}
+
+.mobile-horizontal-row::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-card-item {
+    width: 130px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.mobile-card-thumb {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #282828;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-card-item.artist .mobile-card-thumb {
+    border-radius: 50%;
+}
+
+.mobile-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-card-sub {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* List Items (Songs & Playlists) */
+.mobile-track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mobile-track-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.mobile-track-row:active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-track-row.playing .mobile-row-title {
+    color: var(--spotify-green);
+}
+
+.mobile-row-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: #282828;
+    flex-shrink: 0;
+}
+
+.mobile-row-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.mobile-row-title {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-row-artist {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.mobile-row-action {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* ================= Search Bar ================= */
+.mobile-search-input-wrap {
+    background: #FFFFFF;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    gap: 10px;
+}
+
+.mobile-search-input-wrap input {
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    width: 100%;
+    outline: none;
+}
+
+/* ================= Floating Mini-Player ================= */
+.mobile-mini-player {
+    position: fixed;
+    bottom: calc(56px + var(--safe-area-bottom));
+    left: 8px;
+    right: 8px;
+    height: 56px;
+    background: #282828;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.mini-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2.5px;
+    background: var(--spotify-green);
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.mini-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: #181818;
+    flex-shrink: 0;
+}
+
+.mini-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.mini-title {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-artist {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-ctrl-btn {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mini-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-center-ctrls {
+    display: flex;
+    align-items: center;
+}
+
+.mini-right-actions {
+    display: flex;
+    align-items: center;
+}
+
+.ipad-only {
+    display: none !important;
+}
+
+.ipad-sidebar-brand {
+    display: none !important;
+}
+
+.connect-tab-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.connect-tab-pill.active {
+    background: var(--spotify-green);
+    color: #000;
+    border-color: var(--spotify-green);
+}
+
+/* ================= Full-Screen Player Modal ================= */
+.mobile-fullscreen-modal {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #2a2a2a 0%, #121212 55%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px calc(24px + var(--safe-area-bottom)) 24px;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+.mobile-fullscreen-modal.open {
+    transform: translateY(0);
+}
+
+.fs-modal-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.fs-modal-title-wrap {
+    text-align: center;
+}
+
+.fs-modal-sub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.fs-modal-art-wrap {
+    width: 100%;
+    max-width: 330px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+    background: #181818;
+}
+
+.fs-modal-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fs-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+}
+
+.fs-track-name {
+    font-size: 20px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.fs-track-artist {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Scrub Bar */
+.fs-scrub-box {
+    margin-top: 20px;
+}
+
+.fs-scrub-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    outline: none;
+}
+
+.fs-scrub-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FFFFFF;
+}
+
+.fs-time-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Controls */
+.fs-controls-cluster {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.fs-play-circle-big {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #000000;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.fs-icon-btn {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* ================= Bottom Navigation Bar ================= */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(56px + var(--safe-area-bottom));
+    padding-bottom: var(--safe-area-bottom);
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 90;
+}
+
+.nav-tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 10.5px;
+    font-weight: 600;
+    flex: 1;
+}
+
+.nav-tab-item.active {
+    color: #FFFFFF;
+}
+
+.nav-tab-item svg {
+    fill: currentColor;
+}
+
+/* ==========================================================================
+   IPAD & TABLET SAFARI - NATIVE SPOTIFY TABLET LAYOUT (>= 768px)
+   ========================================================================== */
+
+@media (min-width: 768px) {
+    body {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        grid-template-rows: 1fr 80px;
+        grid-template-areas:
+            "sidebar main"
+            "player player";
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    .ipad-only {
+        display: flex !important;
+    }
+
+    .ipad-sidebar-brand {
+        display: flex !important;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px 20px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 12px;
+    }
+
+    .ipad-brand-name {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: #fff;
+    }
+
+    /* Left Sidebar on iPad */
+    .mobile-bottom-nav {
+        grid-area: sidebar;
+        position: static;
+        width: 240px;
+        height: 100%;
+        background: #000000;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 24px 12px;
+        gap: 6px;
+        z-index: 50;
+        box-shadow: none;
+        max-width: none;
+        left: auto;
+        bottom: auto;
+        transform: none;
+    }
+
+    .nav-tab-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        width: 100%;
+        flex: none;
+        justify-content: flex-start;
+        transition: all 0.15s ease;
+    }
+
+    .nav-tab-item:hover, .nav-tab-item.active {
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-tab-item svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Main Scrollable Canvas on iPad */
+    .mobile-scroll-container {
+        grid-area: main;
+        padding: 32px 40px 40px 40px;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-width: 100%;
+        margin: 0;
+        width: 100%;
+    }
+
+    .mobile-top-bar {
+        display: none;
+    }
+
+    /* Quick Grid: 3 to 4 columns on iPad */
+    .mobile-quick-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 14px;
+    }
+
+    .mobile-quick-card {
+        height: 64px;
+    }
+
+    .mobile-quick-thumb {
+        width: 64px;
+        height: 64px;
+    }
+
+    .mobile-quick-name {
+        font-size: 14px;
+    }
+
+    .mobile-sec-title {
+        font-size: 22px;
+        margin: 32px 0 16px 0;
+    }
+
+    .mobile-card-item {
+        width: 160px;
+    }
+
+    .mobile-card-thumb {
+        width: 160px;
+        height: 160px;
+    }
+
+    /* Track rows on iPad */
+    .mobile-track-row {
+        padding: 10px 14px;
+        border-radius: 8px;
+    }
+
+    .mobile-track-row:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Persistent Bottom Playback Bar (Full Width) */
+    .mobile-mini-player {
+        grid-area: player;
+        position: static;
+        width: 100%;
+        height: 80px;
+        background: #181818;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        max-width: none;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+        z-index: 100;
+        cursor: default;
+    }
+
+    .mini-left {
+        width: 280px;
+        cursor: pointer;
+    }
+
+    .mini-thumb {
+        width: 52px;
+        height: 52px;
+        border-radius: 6px;
+    }
+
+    .mini-title {
+        font-size: 14px;
+    }
+
+    .mini-artist {
+        font-size: 12px;
+    }
+
+    .mini-center-ctrls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .mini-play-circle {
+        width: 44px;
+        height: 44px;
+        background: #fff;
+        color: #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mini-play-circle:hover {
+        transform: scale(1.06);
+    }
+
+    .mini-right-actions {
+        width: 280px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /* Fullscreen Player as an iPad Floating Card */
+    .mobile-fullscreen-modal {
+        position: fixed;
+        inset: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.92);
+        opacity: 0;
+        pointer-events: none;
+        width: 90%;
+        max-width: 520px;
+        max-height: 85vh;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9);
+        padding: 28px 32px 32px 32px;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 500;
+        overflow-y: auto;
+    }
+
+    .mobile-fullscreen-modal.open {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .fs-modal-art-wrap {
+        width: 260px;
+        height: 260px;
+        max-width: 260px;
+        max-height: 260px;
+        margin: 0 auto;
+    }
+
+    .fs-track-name {
+        font-size: 22px;
+        max-width: 360px;
+    }
+
+    .fs-track-artist {
+        font-size: 14px;
+    }
+
+    .fs-play-circle-big {
+        width: 64px;
+        height: 64px;
+    }
+}
+

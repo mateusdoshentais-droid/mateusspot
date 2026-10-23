@@ -1,0 +1,105 @@
+{
+  "name": "spotcry-desktop",
+  "version": "1.0.0",
+  "description": "SpotCry - Reprodutor de Música Moderno de Alta Performance",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "build:nsis": "electron-builder --win nsis --x64",
+    "build:portable": "electron-builder --win portable --x64",
+    "build:dir": "electron-builder --win dir --x64",
+    "gerar": "node gerador_exe.js"
+  },
+  "build": {
+    "appId": "com.spotcry.desktop",
+    "productName": "SpotCry",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "bin",
+        "to": "bin"
+      }
+    ],
+    "fileAssociations": [
+      {
+        "ext": "mp3",
+        "name": "SpotCry Audio File",
+        "description": "Arquivo de Áudio SpotCry",
+        "icon": "build/icon.ico",
+        "role": "Viewer"
+      },
+      {
+        "ext": "flac",
+        "name": "SpotCry Audio File",
+        "description": "Arquivo de Áudio SpotCry",
+        "icon": "build/icon.ico",
+        "role": "Viewer"
+      },
+      {
+        "ext": "wav",
+        "name": "SpotCry Audio File",
+        "description": "Arquivo de Áudio SpotCry",
+        "icon": "build/icon.ico",
+        "role": "Viewer"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "SpotCry",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true
+    }
+  },
+  "keywords": [
+    "music",
+    "player",
+    "electron"
+  ],
+  "author": "Mateus",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "chokidar": "^5.0.0",
+    "music-metadata": "^11.15.0",
+    "node-id3": "^0.2.9",
+    "qrcode": "^1.5.4",
+    "yt-search": "^2.13.1"
+  },
+  "devDependencies": {
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3"
+  }
+}
